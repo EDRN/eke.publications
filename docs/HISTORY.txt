@@ -1,0 +1,49 @@
+Changelog
+=========
+
+What follows is a history of changes from release to release.
+
+
+1.1.0 - Plone 4
+---------------
+
+This release makes eke.publications compatible with Plone 4.
+
+
+1.0.0 - Prime Time
+------------------
+
+This release addresses a number of issues 
+that make this component (and some of its
+selected counterparts) "prime time" for
+the operational NCI portal. 
+
+This release addresses the following issues:
+
+* CA-528 Automatic periodic ingest of RDF
+
+You can find the issue tracker at https://oodt.jpl.nasa.gov/jira/browse/CA
+
+
+0.0.2
+-----
+
+* http://oodt.jpl.nasa.gov/jira/browse/CA-514 - Searching on publication
+  author names should yield the publications in the search results
+
+
+0.0.1 - HTML Cleanup and Citation Formats
+-----------------------------------------
+
+The following issues are addressed in this release:
+
+* http://oodt.jpl.nasa.gov/jira/browse/CA-474 - Publications need to be laid
+  out per NCI requirements
+* http://oodt.jpl.nasa.gov/jira/browse/CA-472 - Protocols and other items seem
+  to still have encoded ASCII characters in the titles
+
+
+0.0.0 - Unreleased
+------------------
+
+Initial release into beta.
