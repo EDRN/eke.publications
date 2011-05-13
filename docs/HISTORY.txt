@@ -3,6 +3,14 @@ Changelog
 
 What follows is a history of changes from release to release.
 
+ 
+1.1.1 - Upgrade Cleanup
+-----------------------
+
+This release updates the GenericSetup profile to 4, provides upgrade steps to
+that profile, and makes the testing and development harness depend on "trunk"
+level of other eggs instead of on released versions of those eggs.
+
 
 1.1.0 - Plone 4
 ---------------
