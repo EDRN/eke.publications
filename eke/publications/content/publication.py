@@ -1,5 +1,5 @@
 # encoding: utf-8
-# Copyright 2009 California Institute of Technology. ALL RIGHTS
+# Copyright 2009-2011 California Institute of Technology. ALL RIGHTS
 # RESERVED. U.S. Government Sponsorship acknowledged.
 
 '''Publication.'''
@@ -130,3 +130,26 @@ def PublicationVocabularyFactory(context):
     items = [(i.Title, i.UID) for i in results]
     return SimpleVocabulary.fromItems(items)
 directlyProvides(PublicationVocabularyFactory, IVocabularyFactory)
+
+def YearVocabularyFactory(context):
+    catalog = getToolByName(context, 'portal_catalog')
+    years = [(i, i) for i in catalog.uniqueValuesFor('year')]
+    years.sort(reverse=True)
+    return SimpleVocabulary.fromItems(years)
+directlyProvides(YearVocabularyFactory, IVocabularyFactory)
+
+def JournalVocabularyFactory(context):
+    catalog = getToolByName(context, 'portal_catalog')
+    journals = [(i, i) for i in catalog.uniqueValuesFor('journal')]
+    journals.sort()
+    return SimpleVocabulary.fromItems(journals)
+directlyProvides(JournalVocabularyFactory, IVocabularyFactory)
+
+def AuthorVocabularyFactory(context):
+    catalog = getToolByName(context, 'portal_catalog')
+    authors = [(i, i) for i in catalog.uniqueValuesFor('authors')]
+    authors.sort()
+    return SimpleVocabulary.fromItems(authors)
+directlyProvides(AuthorVocabularyFactory, IVocabularyFactory)
+
+    
