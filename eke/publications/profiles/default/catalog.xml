@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--
-Copyright 2009 California Institute of Technology. ALL RIGHTS
+Copyright 2009-2011 California Institute of Technology. ALL RIGHTS
 RESERVED. U.S. Government Sponsorship acknowledged.
 -->
 <object name='portal_catalog' meta_type='Plone Catalog Tool'>
@@ -10,6 +10,10 @@ RESERVED. U.S. Government Sponsorship acknowledged.
     <index name='authors' meta_type='KeywordIndex'>
         <indexed_attr value='authors'/>
     </index>
+    <index name='year' meta_type='FieldIndex'>
+        <indexed_attr value='year'/>
+    </index>
     <column value='journal'/>
     <column value='authors'/>
+    <column value='year'/>
 </object>
