@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--
-Copyright 2009 California Institute of Technology. ALL RIGHTS
+Copyright 2009-2011 California Institute of Technology. ALL RIGHTS
 RESERVED. U.S. Government Sponsorship acknowledged.
 -->
 <configure xmlns='http://namespaces.zope.org/zope' i18n_domain='eke.publications'>
@@ -13,5 +13,17 @@ RESERVED. U.S. Government Sponsorship acknowledged.
     <utility
         component='.publication.PublicationVocabularyFactory'
         name='eke.publications.PublicationsVocabulary'
+    />
+    <utility
+        component='.publication.YearVocabularyFactory'
+        name='eke.publications.attributes.year'
+    />
+    <utility
+        component='.publication.JournalVocabularyFactory'
+        name='eke.publications.attributes.journal'
+    />
+    <utility
+        component='.publication.AuthorVocabularyFactory'
+        name='eke.publications.attributes.author'
     />
 </configure>
