@@ -27,6 +27,8 @@ _extras = {
 _externalRequirements = [
     'setuptools',
     'Plone',
+    'collective.monkeypatcher',
+    'eea.facetednavigation',
 ]
 _classifiers = [
     'Development Status :: 4 - Beta',
