@@ -79,11 +79,11 @@ PublicationSchema = knowledgeobject.KnowledgeObjectSchema.copy() + atapi.Schema(
         ),
         predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#pmid',
     ),
-    atapi.IntegerField(
+    atapi.StringField(
         'year',
         required=False,
         storage=atapi.AnnotationStorage(),
-        widget=atapi.IntegerWidget(
+        widget=atapi.StringWidget(
             label=_(u'Year'),
             description=_(u'Year of publication.'),
         ),
@@ -133,7 +133,7 @@ directlyProvides(PublicationVocabularyFactory, IVocabularyFactory)
 
 def YearVocabularyFactory(context):
     catalog = getToolByName(context, 'portal_catalog')
-    years = [(i, i) for i in catalog.uniqueValuesFor('year')]
+    years = [(i is not None and i or u'N/A', i) for i in catalog.uniqueValuesFor('year')] # FIXME: not i18n
     years.sort(reverse=True)
     return SimpleVocabulary.fromItems(years)
 directlyProvides(YearVocabularyFactory, IVocabularyFactory)
@@ -146,10 +146,11 @@ def JournalVocabularyFactory(context):
 directlyProvides(JournalVocabularyFactory, IVocabularyFactory)
 
 def AuthorVocabularyFactory(context):
+    u'''Bug in eea.facetednavigation prevents rendering of its checkbox widget when there
+    are non-ASCII names, such as "Brünagel G", which appears in the the DMCC's output.
+    So we'll leave this in here for now, but won't use it as part of the faceted criteria.'''
     catalog = getToolByName(context, 'portal_catalog')
     authors = [(i, i) for i in catalog.uniqueValuesFor('authors')]
     authors.sort()
     return SimpleVocabulary.fromItems(authors)
 directlyProvides(AuthorVocabularyFactory, IVocabularyFactory)
-
-    
