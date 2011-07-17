@@ -141,7 +141,7 @@ So, let's create one in our above Publication Folder::
     >>> pub.identifier
     'http://unknown.com/pub13792'
     >>> pub.year
-    1964
+    '1964'
     >>> pub.journal
     'Roue'
     >>> pub.issue
@@ -173,8 +173,10 @@ Publication Folder View
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 The publication folder by default displays its publications in alphabetical
-order by title.  Let's check that.  First, we'll need to toss in another
-publication::
+order by title, and uses EEA's faceted navigation add-on for an interactive
+experience.
+
+Let's check that.  First, we'll need to toss in another publication::
 
     >>> browser.open(portalURL + '/my-magazine-collection')
     >>> browser.getLink(id='publication').click()
@@ -184,13 +186,11 @@ publication::
     >>> browser.getControl(name='pubMedID').value = '9551295Q'
     >>> browser.getControl(name='form.button.save').click()
 
-Now, checking the ordering:
+Now, checking the ordering::
 
     >>> browser.open(portalURL + '/my-magazine-collection')
     >>> browser.contents
-    '...Reverse paddle technique...Hardt, D...Deep, S...S.W.I.T.C.H.:...Faetishe, JM...Divine, HR...'
-
-Of course, the user can sort by clicking on the column headings.
+    '...faceted-results...Reverse paddle...S.W.I.T.C.H...'
 
 CA-405 states that PubMed ID's shouldn't appear in the list.  Let's see if
 that's the case::
@@ -198,17 +198,6 @@ that's the case::
 	>>> '1645221Q' not in browser.contents and '9551295Q' not in browser.contents
 	True
 
-Additionally, any nested publication folders should appear above the
-publications list::
-
-    >>> 'Special Subsection' not in browser.contents
-    True
-    >>> browser.getLink(id='publication-folder').click()
-    >>> browser.getControl(name='title').value = u'Special Subsection on Brand-Spanking New Hypermethylation Profiles'
-    >>> browser.getControl(name='form.button.save').click()
-    >>> browser.open(portalURL + '/my-magazine-collection')
-    >>> browser.contents
-    '...Special Subsection...Reverse paddle technique...S.W.I.T.C.H.:...'
 
 
 RDF Ingestion
@@ -246,7 +235,7 @@ Ingesting from the RDF data source ``testscheme://localhost/pubs/a``::
     >>> pub.identifier
     'http://is.gd/pVKq'
     >>> pub.year
-    2009
+    '2009'
     >>> pub.journal
     "Cook's Illustrated"
     >>> pub.issue
@@ -314,24 +303,6 @@ that appropriately.  This new data source contains some nasty markup::
     >>> 'Applying a glaze to a whole man can land you in a sweet mess.' in browser.contents
     True
     >>> '<em>Most</em> glazed man recipes offer some variation on these instructions.' in browser.contents
-    True
-
-
-RDF Data Sources
-~~~~~~~~~~~~~~~~
-
-The URL to an RDF data source is nominally displayed on a publications folder::
-
-    >>> browser.open(portalURL + '/cooks-bookshelf')
-    >>> browser.contents
-    '...RDF Data Source...testscheme://localhost/pubs/e...'
-
-That shows up because we're logged in as an administrator.  Mere mortals
-shouldn't see that::
-
-    >>> browser.open(portalURL + '/logout')
-    >>> browser.open(portalURL + '/cooks-bookshelf')
-    >>> 'RDF Data Source' not in browser.contents
     True
 	
 
