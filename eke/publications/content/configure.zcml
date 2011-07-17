@@ -26,4 +26,12 @@ RESERVED. U.S. Government Sponsorship acknowledged.
         component='.publication.AuthorVocabularyFactory'
         name='eke.publications.attributes.author'
     />
+    <subscriber
+        for='..interfaces.IPublicationFolder zope.app.container.interfaces.IObjectAddedEvent'
+        handler='.publicationfolder.addFacetedNavigation'
+    />
+    <subscriber
+        for='..interfaces.IPublicationFolder Products.Archetypes.interfaces.event.IObjectInitializedEvent'
+        handler='.publicationfolder.addFacetedNavigation'
+    />
 </configure>
