@@ -57,7 +57,7 @@ class IPublication(IKnowledgeObject):
         description=_(u'PubMed identifier for the publication.'),
         required=False,
     )
-    year = schema.Int(
+    year = schema.TextLine(
         title=_(u'Year'),
         description=_(u'Year of publication.'),
         required=False,
