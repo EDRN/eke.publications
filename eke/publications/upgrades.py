@@ -14,7 +14,6 @@ def nullUpgradeStep(setupTool):
 
 def setUpFacetedNavigation(setupTool):
     '''Set up faceted navigation on all Publication Folders.'''
-    import pdb; pdb.set_trace()
     portal = _getPortal(setupTool)
     request = portal.REQUEST
     catalog = getToolByName(portal, 'portal_catalog')
