@@ -131,26 +131,3 @@ def PublicationVocabularyFactory(context):
     return SimpleVocabulary.fromItems(items)
 directlyProvides(PublicationVocabularyFactory, IVocabularyFactory)
 
-def YearVocabularyFactory(context):
-    catalog = getToolByName(context, 'portal_catalog')
-    years = [(i is not None and i or u'N/A', i) for i in catalog.uniqueValuesFor('year')] # FIXME: not i18n
-    years.sort(reverse=True)
-    return SimpleVocabulary.fromItems(years)
-directlyProvides(YearVocabularyFactory, IVocabularyFactory)
-
-def JournalVocabularyFactory(context):
-    catalog = getToolByName(context, 'portal_catalog')
-    journals = [(i, i) for i in catalog.uniqueValuesFor('journal')]
-    journals.sort()
-    return SimpleVocabulary.fromItems(journals)
-directlyProvides(JournalVocabularyFactory, IVocabularyFactory)
-
-def AuthorVocabularyFactory(context):
-    u'''Bug in eea.facetednavigation prevents rendering of its checkbox widget when there
-    are non-ASCII names, such as "Brünagel G", which appears in the the DMCC's output.
-    So we'll leave this in here for now, but won't use it as part of the faceted criteria.'''
-    catalog = getToolByName(context, 'portal_catalog')
-    authors = [(i, i) for i in catalog.uniqueValuesFor('authors')]
-    authors.sort()
-    return SimpleVocabulary.fromItems(authors)
-directlyProvides(AuthorVocabularyFactory, IVocabularyFactory)

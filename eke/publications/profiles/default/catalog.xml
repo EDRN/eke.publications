@@ -4,16 +4,9 @@ Copyright 2009-2011 California Institute of Technology. ALL RIGHTS
 RESERVED. U.S. Government Sponsorship acknowledged.
 -->
 <object name='portal_catalog' meta_type='Plone Catalog Tool'>
-    <index name='journal' meta_type='FieldIndex'>
-        <indexed_attr value='journal'/>
-    </index>
-    <index name='authors' meta_type='KeywordIndex'>
+    <index name='authors' meta_type='ZCTextIndex'>
         <indexed_attr value='authors'/>
+        <extra name='index_type' value='Okapi BM25 Rank' />
+        <extra name='lexicon_id' value='plaintext_lexicon' />
     </index>
-    <index name='year' meta_type='FieldIndex'>
-        <indexed_attr value='year'/>
-    </index>
-    <column value='journal'/>
-    <column value='authors'/>
-    <column value='year'/>
 </object>

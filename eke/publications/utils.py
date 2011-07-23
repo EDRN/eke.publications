@@ -7,6 +7,7 @@ from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from eke.publications.interfaces import IPublication
 from Products.CMFPlone.Portal import PloneSite
 from zope.component import getMultiAdapter
+from Products.CMFCore.utils import getToolByName
 
 def view(self):
     return super(PloneSite, self).view()
@@ -36,30 +37,18 @@ def setFacetedNavigation(folder, request):
         sortreversed=False,
         hidezerocount=False
     )
-    criteria.add(
-        'checkbox', 'left', 'default',
-        title='Journal',
-        hidden=False,
-        index='journal',
-        operator='or',
-        vocabulary=u'eke.publications.attributes.journal',
-        count=True,
-        maxitems=4,
-        sortreversed=False,
-        hidezerocount=False
-    )
-    criteria.add(
-        'checkbox', 'left', 'default',
-        title='Year',
-        hidden=False,
-        index='year',
-        operator='or',
-        vocabulary=u'eke.publications.attributes.year',
-        count=True,
-        maxitems=4,
-        sortreversed=False,
-        hidezerocount=False
-    )
+    criteria.add('text', 'top', 'default', title='Author', hidden=False, index='authors', count=False)
     criteria.add('debug', 'top', 'default', title='Debug Criteria', user='kelly')
-    criteria.add('criteria', 'top', 'default', title='Current Search')
     IFacetedLayout(folder).update_layout('faceted_publications_view')
+    # To make the text field work, the authors index needs to be a text index
+    catalog = getToolByName(folder, 'portal_catalog')
+    found = False
+    for index in catalog.getIndexObjects():
+        if index.id == 'authors':
+            found = True
+            if index.meta_type == 'ZCTextIndex': return
+    if found:
+        catalog.delIndex('authors')
+    catalog.addIndex('authors', 'ZCTextIndex',
+        dict(doc_attr='authors', index_type='Okapi BM25 Rank', lexicon_id='plaintext_lexicon'))
+    catalog.reindexIndex('authors')
