@@ -15,6 +15,10 @@ def view(self):
 def patchMacrosDict(scope, original, replacement):
     scope.view.__dict__['macros'] = {}
 
+class _Extra(object):
+    def __init__(self, doc_attr, index_type, lexicon_id):
+        self.doc_attr, self.index_type, self.lexicon_id = doc_attr, index_type, lexicon_id
+
 def setFacetedNavigation(folder, request):
     subtyper = getMultiAdapter((folder, request), name=u'faceted_subtyper')
     if subtyper.is_faceted or not subtyper.can_enable: return
@@ -49,6 +53,5 @@ def setFacetedNavigation(folder, request):
             if index.meta_type == 'ZCTextIndex': return
     if found:
         catalog.delIndex('authors')
-    catalog.addIndex('authors', 'ZCTextIndex',
-        dict(doc_attr='authors', index_type='Okapi BM25 Rank', lexicon_id='plaintext_lexicon'))
-    catalog.reindexIndex('authors')
+    catalog.addIndex('authors', 'ZCTextIndex', _Extra('authors', 'Okapi BM25 Rank', 'plaintext_lexicon'))
+    catalog.reindexIndex('authors', request)
