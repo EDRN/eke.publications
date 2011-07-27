@@ -10,7 +10,7 @@ import os.path
 # ------------
 
 _name        = 'eke.publications'
-_version     = '1.1.4'
+_version     = '1.1.5'
 _description = 'Publications Management for the EDRN Knowledge Environment'
 _url         = 'http://cancer.jpl.nasa.gov/products/eke-publications'
 _downloadURL = 'http://oodt.jpl.nasa.gov/dist/eke'
