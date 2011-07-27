@@ -3,13 +3,13 @@ Changelog
 
 What follows is a history of changes from release to release.
 
-1.1.4 - TBD
------------
+1.1.4 — Sleuthing for Authors
+-----------------------------
 
 This release adds an author search box to Publication Folder objects.
 
 
-1.1.3 - Snazzier Pubs
+1.1.3 — Snazzier Pubs
 ---------------------
 
 This release includes:
@@ -21,7 +21,7 @@ This is all in preparation for a newly revamped AJAX-powered Publications
 page.
 
 
-1.1.2 - Let's Collab—Er, Test!
+1.1.2 — Let's Collab—Er, Test!
 ------------------------------
 
 This release includes:
@@ -29,7 +29,7 @@ This release includes:
 * A plone.app.testing layer. It doesn't use it yet, though.
 
  
-1.1.1 - Upgrade Cleanup
+1.1.1 — Upgrade Cleanup
 -----------------------
 
 This release updates the GenericSetup profile to 4, provides upgrade steps to
@@ -37,13 +37,13 @@ that profile, and makes the testing and development harness depend on "trunk"
 level of other eggs instead of on released versions of those eggs.
 
 
-1.1.0 - Plone 4
+1.1.0 — Plone 4
 ---------------
 
 This release makes eke.publications compatible with Plone 4.
 
 
-1.0.0 - Prime Time
+1.0.0 — Prime Time
 ------------------
 
 This release addresses a number of issues 
@@ -65,7 +65,7 @@ You can find the issue tracker at https://oodt.jpl.nasa.gov/jira/browse/CA
   author names should yield the publications in the search results
 
 
-0.0.1 - HTML Cleanup and Citation Formats
+0.0.1 — HTML Cleanup and Citation Formats
 -----------------------------------------
 
 The following issues are addressed in this release:
@@ -76,7 +76,7 @@ The following issues are addressed in this release:
   to still have encoded ASCII characters in the titles
 
 
-0.0.0 - Unreleased
+0.0.0 — Unreleased
 ------------------
 
 Initial release into beta.
