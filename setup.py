@@ -1,5 +1,5 @@
 # encoding: utf-8
-# Copyright 2009-2011 California Institute of Technology. ALL RIGHTS
+# Copyright 2009–2012 California Institute of Technology. ALL RIGHTS
 # RESERVED. U.S. Government Sponsorship acknowledged.
 
 from setuptools import setup, find_packages
@@ -26,7 +26,7 @@ _extras = {
 }
 _externalRequirements = [
     'setuptools',
-    'Plone',
+    'Products.CMFPlone',
     'collective.monkeypatcher',
     'eea.facetednavigation',
 ]
