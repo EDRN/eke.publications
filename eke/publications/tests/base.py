@@ -1,32 +1,11 @@
 # encoding: utf-8
-# Copyright 2008 California Institute of Technology. ALL RIGHTS
+# Copyright 2008–2012 California Institute of Technology. ALL RIGHTS
 # RESERVED. U.S. Government Sponsorship acknowledged.
 
-'''
-Testing base code.
+'''Test data.
 '''
 
-from Products.Five import zcml
-from Products.Five import fiveconfigure
-from Testing import ZopeTestCase as ztc
-from Products.PloneTestCase import PloneTestCase as ptc
-from Products.PloneTestCase.layer import onsetup
 import eke.knowledge.tests.base as ekeKnowledgeBase
-
-# Traditional Products we have to load manually for test cases:
-# (none at this time)
-
-@onsetup
-def setupEKEPublications():
-    '''Set up additional products required.'''
-    fiveconfigure.debug_mode = True
-    import eke.publications
-    zcml.load_config('configure.zcml', eke.publications)
-    fiveconfigure.debug_mode = False
-    ztc.installPackage('eke.publications')
-
-setupEKEPublications()
-ptc.setupPloneSite(products=['eke.publications'])
 
 _singlePublicationRDF = '''<?xml version="1.0" encoding="UTF-8"?><rdf:RDF  xmlns:_3="http://purl.org/dc/terms/" xmlns:_4="http://edrn.nci.nih.gov/rdf/schema.rdf#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><rdf:Description rdf:about="http://is.gd/pVKq"><rdf:type rdf:resource="http://edrn.nci.nih.gov/rdf/types.rdf#Publication"/><_3:title>Glazed Roast Chicken</_3:title><_3:description>Applying a glaze to a whole chicken can land you in a sweet mess.</_3:description><_4:abstract>Most glazed roast chicken recipes offer some variation on these instructions.</_4:abstract><_3:author>Kimball, C</_3:author><_3:author>Gavorick, M</_3:author><_4:year>2009</_4:year><_4:journal>Cook's Illustrated</_4:journal><_4:issue>March</_4:issue><_4:volume>12</_4:volume><_4:pmid>123456X</_4:pmid><_4:pubURL>http://is.gd/pVKq</_4:pubURL></rdf:Description></rdf:RDF>'''
 
@@ -115,17 +94,3 @@ def registerLocalTestData():
     ekeKnowledgeBase.registerTestData('/pubs/c', _morePublicationRDF)
     ekeKnowledgeBase.registerTestData('/pubs/d', _yetMorePublicationRDF)
     ekeKnowledgeBase.registerTestData('/pubs/e', _markedUpPublicationRDF)
-
-class BaseTestCase(ekeKnowledgeBase.BaseTestCase):
-    '''Base for tests in this package.'''
-    def setUp(self):
-        super(BaseTestCase, self).setUp()
-        registerLocalTestData()
-    
-class FunctionalBaseTestCase(ekeKnowledgeBase.FunctionalBaseTestCase):
-    '''Base class for functional (doc-)tests.'''
-    def setUp(self):
-        super(FunctionalBaseTestCase, self).setUp()
-        registerLocalTestData()
-    
-
