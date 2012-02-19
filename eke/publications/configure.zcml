@@ -12,7 +12,10 @@ RESERVED. U.S. Government Sponsorship acknowledged.
     xmlns:zcml='http://namespaces.zope.org/zcml'
     i18n_domain='eke.publications'>
 
-    <include package='collective.monkeypatcher' />
+    <include package='z3c.autoinclude' file='meta.zcml' />
+    <includeDependenciesOverrides package='.' />
+    <includeDependencies package='.' />
+
     <monkey:patch
         description='Adds a "macros" empty dictionary attribute to the PloneSite class so eea.facetedvocabularies will work on custom content types with Zope 3 browser views instead of page templates—which it expects.'
         class='Products.CMFPlone.Portal.PloneSite'
