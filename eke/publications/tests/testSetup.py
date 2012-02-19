@@ -1,21 +1,22 @@
 # encoding: utf-8
-# Copyright 2009 California Institute of Technology. ALL RIGHTS
+# Copyright 2009–2012 California Institute of Technology. ALL RIGHTS
 # RESERVED. U.S. Government Sponsorship acknowledged.
 
-'''
-EKE Publications: test the setup of this package.
+'''EKE Publications: tests of the setup of this package.
 '''
 
-from eke.publications.tests.base import BaseTestCase
-from Products.CMFCore.utils import getToolByName
-from zope.component import queryUtility
-from zope.schema.interfaces import IVocabularyFactory
 from eea.facetednavigation.interfaces import IPossibleFacetedNavigable
 from eke.publications.content.publicationfolder import PublicationFolder
-import unittest
+from eke.publications.testing import EKE_PUBLICATIONS_INTEGRATION_TESTING
+from Products.CMFCore.utils import getToolByName
+import unittest2 as unittest
 
-class SetupTest(BaseTestCase):
+class SetupTest(unittest.TestCase):
     '''Unit tests the setup of this package.'''
+    layer = EKE_PUBLICATIONS_INTEGRATION_TESTING
+    def setUp(self):
+        super(SetupTest, self).setUp()
+        self.portal = self.layer['portal']
     def testCatalogIndexes(self):
         catalog = getToolByName(self.portal, 'portal_catalog')
         indexes = catalog.indexes()
@@ -31,7 +32,7 @@ class SetupTest(BaseTestCase):
         self.failUnless(IPossibleFacetedNavigable.implementedBy(PublicationFolder))
 
 def test_suite():
-    suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(SetupTest))
-    return suite
-    
+    return unittest.defaultTestLoader.loadTestsFromName(__name__)
+
+if __name__ == '__main__':
+    unittest.main(defaultTest='test_suite')
