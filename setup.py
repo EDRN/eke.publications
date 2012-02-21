@@ -29,6 +29,7 @@ _externalRequirements = [
     'Products.CMFPlone',
     'collective.monkeypatcher',
     'eea.facetednavigation',
+    'z3c.autoinclude',
 ]
 _classifiers = [
     'Development Status :: 4 - Beta',
