@@ -30,6 +30,7 @@ _externalRequirements = [
     'collective.monkeypatcher',
     'eea.facetednavigation',
     'z3c.autoinclude',
+    'zope.globalrequest',
 ]
 _classifiers = [
     'Development Status :: 4 - Beta',
