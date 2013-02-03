@@ -114,9 +114,9 @@ So, let's create one in our above Publication Folder::
     >>> browser.getControl(name='pubMedID').value = '1645221Q'
     >>> browser.getControl(name='pubURL').value = 'http://unknown.com/printable/pub13792'
     >>> browser.getControl(name='form.button.save').click()
-    >>> 's.w.i.t.c.h.-a-new-model-for-release-of-norepinephrine' in f.objectIds()
+    >>> 's-w-i-t-c-h-a-new-model-for-release-of-norepinephrine' in f.objectIds()
     True
-    >>> pub = f['s.w.i.t.c.h.-a-new-model-for-release-of-norepinephrine']
+    >>> pub = f['s-w-i-t-c-h-a-new-model-for-release-of-norepinephrine']
     >>> pub.title
     'S.W.I.T.C.H.: a new model for release of norepinephrine'
     >>> pub.description
@@ -154,37 +154,6 @@ publications.  Let's see if we're actually following that format::
     '...Faetishe, JM, Divine, HR...S.W.I.T.C.H...<cite>...Roue...</cite>...1964;...4...'
 
 Lookin' good.
-
-
-Publication Folder View
-~~~~~~~~~~~~~~~~~~~~~~~
-
-The publication folder by default displays its publications in alphabetical
-order by title, and uses EEA's faceted navigation add-on for an interactive
-experience.
-
-Let's check that.  First, we'll need to toss in another publication::
-
-    >>> browser.open(portalURL + '/my-magazine-collection')
-    >>> browser.getLink(id='publication').click()
-    >>> browser.getControl(name='title').value = u'Reverse paddle technique for hematoma articulation'
-    >>> browser.getControl(name='identifier').value = 'http://unknown.com/pub96992'
-    >>> browser.getControl(name='authors:lines').value = u'Hardt, D\nDeep, S'
-    >>> browser.getControl(name='pubMedID').value = '9551295Q'
-    >>> browser.getControl(name='form.button.save').click()
-
-Now, checking the ordering::
-
-    >>> browser.open(portalURL + '/my-magazine-collection')
-    >>> browser.contents
-    '...faceted-results...Reverse paddle...S.W.I.T.C.H...'
-
-CA-405 states that PubMed ID's shouldn't appear in the list.  Let's see if
-that's the case::
-
-	>>> '1645221Q' not in browser.contents and '9551295Q' not in browser.contents
-	True
-
 
 
 RDF Ingestion
