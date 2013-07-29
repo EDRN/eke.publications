@@ -18,9 +18,11 @@ _author      = 'Sean Kelly'
 _authorEmail = 'sean.kelly@jpl.nasa.gov'
 _license     = 'Proprietary'
 _namespaces  = ['eke']
-_entryPoints = {}
 _zipSafe     = False
 _keywords    = 'web zope plone edrn cancer biomarkers eke knowledge publication article journal document book'
+_entryPoints = {
+    'z3c.autoinclude.plugin': ['target=plone'],
+}
 _extras = {
     'test': ['plone.app.testing'],
 }

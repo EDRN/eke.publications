@@ -9,11 +9,6 @@ from Products.CMFPlone.Portal import PloneSite
 from zope.component import getMultiAdapter
 from Products.CMFCore.utils import getToolByName
 
-def view(self):
-    return super(PloneSite, self).view()
-
-def patchMacrosDict(scope, original, replacement):
-    scope.view.__dict__['macros'] = {}
 
 class _Extra(object):
     def __init__(self, doc_attr, index_type, lexicon_id):
