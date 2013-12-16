@@ -25,6 +25,11 @@ class SetupTest(unittest.TestCase):
     def testFacetNavigability(self):
         '''Ensure the Publications Folder type can use faceted navigation.'''
         self.failUnless(IPossibleFacetedNavigable.implementedBy(PublicationFolder))
+    def testDiscussion(self):
+        '''Ensure discussion is not allowed (CA-1229)'''
+        types = getToolByName(self.portal, 'portal_types')
+        for i in ('Publication', 'Publication Folder'):
+            self.failIf(types[i].allow_discussion, 'Type "%s" allows discussion but it should not' % i)
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
