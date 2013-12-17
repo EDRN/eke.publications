@@ -3,8 +3,8 @@ Changelog
 
 What follows is a history of changes from release to release.
 
-1.1.9 — TBD
------------
+1.1.9 — Let's Not Talk
+----------------------
 
 • CA-1229 - Discussion re-enabled after upgrade
 
