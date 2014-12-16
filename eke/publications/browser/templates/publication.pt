@@ -10,9 +10,54 @@
         <title>Publication</title>
     </head>
     <body>
+        <metal:css fill-slot='style_slot'>
+            <style type='text/css' media='all'
+                tal:content='string:@import url(${context/++resource++eke-publications.css});'></style>
+        </metal:css>
         <metal:main fill-slot='content-core'>
             <tal:main-macro metal:define-macro='content-core'>
-                <p i18n:translate='biobliographicCitation' class='bibliographicCitation'>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style='vertical-align: top !important; padding-right: 1em;'>
+                                <label for='pubAuthors' i18n:translate='ekePublicationsHeadingAuthors'>
+                                    Authors:
+                                </label>
+                                <ul id='pubAuthors' tal:define='authors context/authors'>
+                                    <li tal:repeat='author authors' tal:content='author'>
+                                        Largenose N
+                                    </li>
+                                </ul>
+                                <label for='pubMedID' i18n:translate='ekePublicationsHeadingPubMedID'>
+                                    PubMed ID:
+                                </label>
+                                <p id='pubMedID'>
+                                    <a href='#' tal:attributes='href view/pubMedURL' tal:content='context/pubMedID'>
+                                        1234.5
+                                    </a>
+                                </p>
+                            </td>
+                            <td style='vertical-align: top !important;' width='90%'>
+                                <label for='pubAbstract' i18n:translate='ekePublicationsHeadingAbstract'>
+                                    Abstract:
+                                </label>
+                                <p tal:content='context/abstract' tal:condition='context/abstract'>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </p>
+                                <p tal:condition='not:context/abstract' class='discreet'
+                                    i18n:translate='ekePublicationsAdmonitionNoAbstract'>
+                                    Abstract text not available.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>           
+<!--                 <p i18n:translate='biobliographicCitation' class='bibliographicCitation'>
                     <span tal:condition='context/authors|nothing'>
                         <span i18n:name='authors' tal:replace='python:", ".join(context.authors)'>Kelly S, Heather, K</span>.
                     </span>
@@ -48,7 +93,7 @@
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
                     </p>
                 </tal:block>
-            </tal:main-macro>
+ -->            </tal:main-macro>
         </metal:main>
     </body>
 </html>

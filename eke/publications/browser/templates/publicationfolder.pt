@@ -55,13 +55,13 @@
                 </p>
                 <div tal:condition='haveContents' tal:define='batch python:Batch(contents, b_size, int(b_start), orphan=1);'
                     tal:omit-tag=''>
-                    <table class='listing'>
+                    <table class='listing publicationsTable'>
                         <thead>
                             <tr><th>Title</th><th>Journal</th><th>Authors</th></tr>
                         </thead>
                         <tbody>
-                            <tr tal:repeat='item batch'>
-                                <td tal:define='pURL item/url; pName item/title;'>
+                            <tr tal:repeat='item batch' style='margin-bottom: 2em !important;'>
+                                <td tal:define='pURL item/url; pName item/title;' style='padding: 2em !important;'>
                                     <a href='#' tal:attributes='href pURL;' tal:content='pName'>
                                         Deconstructing Acidophilus Mylactera
                                     </a>

@@ -20,8 +20,14 @@ class SetupTest(unittest.TestCase):
     def testCatalogIndexes(self):
         catalog = getToolByName(self.portal, 'portal_catalog')
         indexes = catalog.indexes()
-        for i in ('authors',):
+        for i in ('authors', 'year', 'journal'):
             self.failUnless(i in indexes, '%s not found in catalog indexes' % i)
+    def testCatalogMetadata(self):
+        u'''Check that we have the right metadata columns.'''
+        catalog = getToolByName(self.portal, 'portal_catalog')
+        columns = catalog.schema()
+        for i in ('authors', 'year', 'journal'):
+            self.failUnless(i in columns, u'Missing column "{}" in portal_catalog'.format(i))
     def testFacetNavigability(self):
         '''Ensure the Publications Folder type can use faceted navigation.'''
         self.failUnless(IPossibleFacetedNavigable.implementedBy(PublicationFolder))

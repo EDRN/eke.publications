@@ -45,5 +45,9 @@ RESERVED. U.S. Government Sponsorship acknowledged.
         menu='plone_displayviews'
         title='Publication view'
     />
+    <browser:resource
+        name='eke-publications.css'
+        file='eke-publications.css'
+    />
     
 </configure>

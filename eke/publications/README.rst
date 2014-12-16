@@ -176,36 +176,31 @@ Ingesting from the RDF data source ``testscheme://localhost/pubs/a``::
 
     >>> browser.open(portalURL + '/cooks-bookshelf/ingest')
     >>> browser.contents
-    '...The following items have been created...Glazed Roast Chicken...'
+    '...The following items have been created...Early detection biomarkers for ovarian cancer...'
     >>> f.objectIds()
-    ['glazed-roast-chicken']
-    >>> pub = f['glazed-roast-chicken']
+    ['23319948-early-detection-biomarkers-for-ovarian']
+    >>> pub = f['23319948-early-detection-biomarkers-for-ovarian']
     >>> pub.title
-    'Glazed Roast Chicken'
-    >>> pub.description
-    'Applying a glaze to a whole chicken can land you in a sweet mess.'
+    'Early detection biomarkers for ovarian cancer.'
     >>> pub.abstract
-    'Most glazed roast chicken recipes offer some variation on these instructions.'
-    >>> 'Gavorick, M' in pub.authors and 'Kimball, C' in pub.authors
-    True
+    'Despite the widespread use of conventional and contemporary methods...'
+    >>> pub.authors
+    ('Sarojini S', 'Tamir A', 'Lim H', 'Li S', 'Zhang S', 'Goy A', 'Pecora A', 'Suh KS')
     >>> pub.identifier
     'http://is.gd/pVKq'
     >>> pub.year
-    '2009'
+    '2012'
     >>> pub.journal
-    "Cook's Illustrated"
+    'J Oncol'
     >>> pub.issue
-    'March'
+    ''
     >>> pub.volume
-    '12'
+    '2012'
     >>> pub.pubMedID
-    '123456X'
-    >>> pub.pubURL
-    'http://is.gd/pVKq'
+    '23319948'
 
-The source ``testscheme://localhost/pub/b`` contains both the Glazed Roast
-Chicken article *and* an article on Teriyaki Beef.  Since ingestion purges
-existing objects, we shouldn't get duplicate copies of the chicken recipe::
+The source ``testscheme://localhost/pub/b`` contains both the above article and
+a second one; however we shouldn't get duplicates::
 
     >>> browser.getLink('Edit').click()
     >>> browser.getControl(name='rdfDataSource').value = 'testscheme://localhost/pubs/b'
@@ -214,17 +209,7 @@ existing objects, we shouldn't get duplicate copies of the chicken recipe::
     >>> objIDs = f.objectIds()
     >>> objIDs.sort()
     >>> objIDs
-    ['glazed-roast-chicken', 'teriyaki-beef']
-    
-Although the PubMed ID is a required attribute, it's often missing in the RDF
-we get from the DMCC.  In such a case, we shouldn't generate an invalid link
-to PubMed in the folder's view.  Let's check that!  It just so happens the
-Teriyaki Beef recipe's RDF is missing a statement as to its PubMed ID; is
-there a URL? Checking::
-
-    >>> browser.open(portalURL + '/cooks-bookshelf')
-    >>> 'http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=DetailsSearch&amp;Term=%5Buid%5D">' not in browser.contents
-    True
+    ['21666252-letter-to-the-editor-seqxml-and-orthoxml', '23319948-early-detection-biomarkers-for-ovarian']
 
 
 Multiple Data Sources
@@ -240,26 +225,6 @@ additional data in and see it can successfully ingest it::
 	>>> browser.getLink('Ingest').click()
 	>>> len(f.objectIds())
 	6
-
-
-HTML Markup
-~~~~~~~~~~~
-
-http://oodt.jpl.nasa.gov/jira/browse/CA-472 reveals that RDF from the DMCC
-doesn't contain plain text, but HTML markup.  Sigh.  Let's see if we deal with
-that appropriately.  This new data source contains some nasty markup::
-
-    >>> browser.getLink('Edit').click()
-    >>> browser.getControl(name='rdfDataSource').value = 'testscheme://localhost/pubs/e'
-    >>> browser.getControl(name='form.button.save').click()
-    >>> browser.getLink('Ingest').click()
-    >>> browser.open(portalURL + '/cooks-bookshelf/how-to-serve-man')
-    >>> 'How to "Serve" Man' in browser.contents
-    True
-    >>> 'Applying a glaze to a whole man can land you in a sweet mess.' in browser.contents
-    True
-    >>> '<em>Most</em> glazed man recipes offer some variation on these instructions.' in browser.contents
-    True
 	
 
 Vocabularies
@@ -283,9 +248,9 @@ name doesn't work.  Let's find out::
 
     >>> from Products.CMFCore.utils import getToolByName
     >>> catalog = getToolByName(portal, 'portal_catalog')
-    >>> results = catalog.unrestrictedSearchResults(SearchableText='Voodoo')
+    >>> results = catalog.unrestrictedSearchResults(SearchableText='Sarojini')
 	>>> [i.Title for i in results if i.portal_type == 'Publication']
-	['How to "Serve" Man']
+	['Early detection biomarkers for ovarian cancer.']
 
 Works!
 

@@ -31,6 +31,8 @@ _externalRequirements = [
     'eea.facetednavigation',
     'z3c.autoinclude',
     'zope.globalrequest',
+    'biopython',
+    'plone.api',
 ]
 _classifiers = [
     'Development Status :: 4 - Beta',

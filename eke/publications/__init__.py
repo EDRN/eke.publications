@@ -6,12 +6,15 @@
 '''
 
 from zope.i18nmessageid import MessageFactory
-
-ProjectMessageFactory = MessageFactory('eke.publications')
-
 from eke.publications import config
 from Products.Archetypes import atapi
 import Products.CMFCore
+
+PACKAGE_NAME          = __name__
+PROFILE_ID            = 'profile-' + PACKAGE_NAME + ':default'
+ENTREZ_TOOL           = 'edrn-portal'
+ENTREZ_EMAIL          = 'sean.kelly@nih.gov'
+ProjectMessageFactory = MessageFactory(PACKAGE_NAME)
 
 def initialize(context):
     '''Initializer called when used as a Zope 2 product.'''
