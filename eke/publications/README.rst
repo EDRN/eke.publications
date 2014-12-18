@@ -140,18 +140,10 @@ So, let's create one in our above Publication Folder::
     >>> pub.pubURL
     'http://unknown.com/printable/pub13792'
     
-A publication page should include a link to its PubMed entry as well to its URL:
+A publication page should include a link to its PubMed entry::
 
     >>> browser.contents
     '...<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=DetailsSearch&amp;Term=1645221Q%5Buid%5D">...'
-    >>> browser.contents
-    '...<a href="http://unknown.com/printable/pub13792">...'
-
-http://oodt.jpl.nasa.gov/jira/browse/CA-474 specifies a specific format for
-publications.  Let's see if we're actually following that format::
-
-    >>> browser.contents
-    '...Faetishe, JM, Divine, HR...S.W.I.T.C.H...<cite>...Roue...</cite>...1964;...4...'
 
 Lookin' good.
 
