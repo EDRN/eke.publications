@@ -143,7 +143,7 @@ So, let's create one in our above Publication Folder::
 A publication page should include a link to its PubMed entry::
 
     >>> browser.contents
-    '...<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=DetailsSearch&amp;Term=1645221Q%5Buid%5D">...'
+    '...<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=DetailsSearch&amp;Term=1645221Q%5Buid%5D"...'
 
 Lookin' good.
 
