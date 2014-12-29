@@ -4,7 +4,6 @@
     list-style: none !important;
     margin-left: 0 !important;
     line-height: 0.9em !important;
-    font-size: 80%;
 }
 
 .publicationsTable tbody tr {
@@ -12,4 +11,11 @@
 }
 .publicationsTable tbody tr td {
     margin: 0 0.5em 1em 0.5em;
+}
+
+div#content div label {
+    background-color: transparent !important;
+    font-weight: bold !important;
+    border-bottom: none !important;
+    padding: 0 !important;
 }

@@ -57,6 +57,11 @@ class IPublication(IKnowledgeObject):
         description=_(u'PubMed identifier for the publication.'),
         required=False,
     )
+    month = schema.TextLine(
+        title=_(u'Month'),
+        description=_(u'Month of publication.'),
+        required=False,
+    )
     year = schema.TextLine(
         title=_(u'Year'),
         description=_(u'Year of publication.'),

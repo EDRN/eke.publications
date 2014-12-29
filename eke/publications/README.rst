@@ -175,7 +175,7 @@ Ingesting from the RDF data source ``testscheme://localhost/pubs/a``::
     >>> pub.title
     'Early detection biomarkers for ovarian cancer.'
     >>> pub.abstract
-    'Despite the widespread use of conventional and contemporary methods...'
+    '<p>Despite the widespread use of conventional and contemporary methods...'
     >>> pub.authors
     ('Sarojini S', 'Tamir A', 'Lim H', 'Li S', 'Zhang S', 'Goy A', 'Pecora A', 'Suh KS')
     >>> pub.identifier
@@ -190,6 +190,7 @@ Ingesting from the RDF data source ``testscheme://localhost/pubs/a``::
     '2012'
     >>> pub.pubMedID
     '23319948'
+
 
 The source ``testscheme://localhost/pub/b`` contains both the above article and
 a second one; however we shouldn't get duplicates::

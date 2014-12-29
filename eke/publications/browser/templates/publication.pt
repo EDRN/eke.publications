@@ -19,29 +19,43 @@
                 <table>
                     <tbody>
                         <tr>
-                            <td style='vertical-align: top !important; padding-right: 1em;'>
+                            <td style='vertical-align: top !important; padding-right: 1em;' width='85px'>
                                 <label for='pubAuthors' i18n:translate='ekePublicationsHeadingAuthors'>
                                     Authors:
                                 </label>
-                                <ul id='pubAuthors' tal:define='authors context/authors'>
-                                    <li tal:repeat='author authors' tal:content='author'>
+                                <ul id='pubAuthors' tal:define='authors context/authors' style='font-size: 80% !importatn'>
+                                    <li tal:repeat='author authors' tal:content='author'
+                                        style='padding-bottom: 0.5em'>
                                         Largenose N
                                     </li>
                                 </ul>
-                                <label for='pubMedID' i18n:translate='ekePublicationsHeadingPubMedID'>
+                                <label for='pubMedID' i18n:translate='ekePublicationsHeadingPubMedID'
+                                    style='margin-top: 2em;'>
                                     PubMed ID:
                                 </label>
                                 <p id='pubMedID'>
-                                    <a href='#' tal:attributes='href view/pubMedURL' tal:content='context/pubMedID'>
+                                    <a href='#' tal:attributes='href view/pubMedURL' tal:content='context/pubMedID'
+                                        style='font-size: 80% !important'>
                                         1234.5
                                     </a>
                                 </p>
+                                <label for='appearsIn' i18n:translate='ekePublicationsHeadingAppearsIn'
+                                    style='margin-top: 2em;'>
+                                    Appears In:
+                                </label>
+                                <p id='appearsIn' style='font-size: 80% !important'>
+                                    <span tal:replace='context/journal|nothing'>J Big Noses</span>
+                                    <span tal:replace='context/volume|nothing'>69</span>
+                                    <span tal:replace='context/issue|nothing'>Special Up Nose Edition</span>
+                                    <span tal:replace='context/year|nothing'>1969</span>
+                                    <span tal:replace='context/month|nothing'>Juliuary</span>
+                                </p>
                             </td>
-                            <td style='vertical-align: top !important;' width='90%'>
+                            <td style='vertical-align: top !important;'>
                                 <label for='pubAbstract' i18n:translate='ekePublicationsHeadingAbstract'>
                                     Abstract:
                                 </label>
-                                <p tal:content='context/abstract' tal:condition='context/abstract'>
+                                <p tal:content='structure context/abstract' tal:condition='context/abstract'>
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

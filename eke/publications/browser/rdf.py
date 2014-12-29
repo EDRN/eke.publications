@@ -14,12 +14,12 @@ from eke.publications import ENTREZ_TOOL, ENTREZ_EMAIL
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from Bio import Entrez
 from zope.component import getUtility
-import plone.api, contextlib, logging
+import plone.api, contextlib, logging, cgi
 
 _logger = logging.getLogger(__name__)
 
 # Constants
-FETCH_GROUP_SIZE = 300 # Fetch this many publications in Entrez.fetch, pausing to construct objects between each
+FETCH_GROUP_SIZE = 450 # Fetch this many publications in Entrez.fetch, pausing to construct objects between each
 
 # Other constnats: Well-known URI refs
 _publicationTypeURI = URIRef('http://edrn.nci.nih.gov/rdf/types.rdf#Publication')
@@ -127,9 +127,9 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
                     pub.title = title
                     abstract = medline[u'MedlineCitation'][u'Article'].get(u'Abstract', None)
                     if abstract:
-                        abstractText = abstract.get(u'AbstractText', [])
-                        if len(abstractText) > 0:
-                            pub.abstract = unicode(abstractText[0])
+                        paragraphs = abstract.get(u'AbstractText', [])
+                        if len(paragraphs) > 0:
+                            pub.abstract = u'\n'.join([u'<p>{}</p>'.format(cgi.escape(j)) for j in paragraphs])
                     self.setAuthors(pub, medline)
                     issue = medline[u'MedlineCitation'][u'Article'][u'Journal'][u'JournalIssue'].get(u'Issue', None)
                     if issue: pub.issue = unicode(issue)
@@ -140,6 +140,10 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
                         u'Year', None
                     )
                     if year: pub.year = unicode(year)
+                    month = medline[u'MedlineCitation'][u'Article'][u'Journal'][u'JournalIssue'][u'PubDate'].get(
+                        u'Month', None
+                    )
+                    if month: pub.month = unicode(month)
                     pub.pubMedID = pubMedID
                     pub.reindexObject()
                     createdObjects.append(CreatedObject(pub))

@@ -90,6 +90,16 @@ PublicationSchema = knowledgeobject.KnowledgeObjectSchema.copy() + atapi.Schema(
         predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#year',
     ),
     atapi.StringField(
+        'month',
+        required=False,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'Month'),
+            description=_(u'Month of publication.'),
+        ),
+        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#month',
+    ),
+    atapi.StringField(
         'pubURL',
         required=False,
         storage=atapi.AnnotationStorage(),
@@ -119,6 +129,7 @@ class Publication(knowledgeobject.KnowledgeObject):
     journal     = atapi.ATFieldProperty('journal')
     pubMedID    = atapi.ATFieldProperty('pubMedID')
     year        = atapi.ATFieldProperty('year')
+    month       = atapi.ATFieldProperty('month')
     pubURL      = atapi.ATFieldProperty('pubURL')
     
 atapi.registerType(Publication, PROJECTNAME)
