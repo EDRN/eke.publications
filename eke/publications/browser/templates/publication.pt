@@ -23,10 +23,19 @@
                                 <label for='pubAuthors' i18n:translate='ekePublicationsHeadingAuthors'>
                                     Authors:
                                 </label>
-                                <ul id='pubAuthors' tal:define='authors context/authors' style='font-size: 80% !importatn'>
-                                    <li tal:repeat='author authors' tal:content='author'
-                                        style='padding-bottom: 0.5em'>
-                                        Largenose N
+                                <ul id='pubAuthors' tal:define='authors context/authors'
+                                    style='font-size: 80% !important'>
+                                    <li tal:repeat='author authors' style='padding-bottom: 0.5em'>
+                                        <tal:define define='authorURL python:view.generateAuthorLink(author);'>
+                                            <tal:if condition='authorURL'>
+                                                <a href='#' tal:attributes='href authorURL' tal:content='author'>
+                                                    Largenose N
+                                                </a>
+                                            </tal:if>
+                                            <span tal:condition='not:authorURL' tal:content='author'>
+                                                Largenose N
+                                            </span>
+                                        </tal:define>
                                     </li>
                                 </ul>
                                 <label for='pubMedID' i18n:translate='ekePublicationsHeadingPubMedID'
@@ -44,11 +53,11 @@
                                     Appears In:
                                 </label>
                                 <p id='appearsIn' style='font-size: 80% !important'>
-                                    <span tal:replace='context/journal|nothing'>J Big Noses</span>
-                                    <span tal:replace='context/volume|nothing'>69</span>
-                                    <span tal:replace='context/issue|nothing'>Special Up Nose Edition</span>
+                                    <span tal:replace='context/journal|nothing'>J Big Noses</span>.
                                     <span tal:replace='context/year|nothing'>1969</span>
                                     <span tal:replace='context/month|nothing'>Juliuary</span>
+                                    <span tal:replace='context/volume|nothing'>69</span>
+                                    (<span tal:replace='context/issue|nothing'>Special Up Nose Edition</span>).
                                 </p>
                             </td>
                             <td style='vertical-align: top !important;'>

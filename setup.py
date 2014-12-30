@@ -33,6 +33,7 @@ _externalRequirements = [
     'zope.globalrequest',
     'biopython',
     'plone.api',
+    'eke.site',
 ]
 _classifiers = [
     'Development Status :: 4 - Beta',
