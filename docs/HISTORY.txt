@@ -4,8 +4,8 @@ Changelog
 What follows is a history of changes from release to release.
 
 
-1.1.11 — TBD
-------------
+1.1.11 — Authoritative
+----------------------
 
 • CA-179: during RDF ingest, use only the PubMed ID and query PubMed for
   publication details.  Improve layout of results display.
