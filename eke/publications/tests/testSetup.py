@@ -20,7 +20,7 @@ class SetupTest(unittest.TestCase):
     def testCatalogIndexes(self):
         catalog = getToolByName(self.portal, 'portal_catalog')
         indexes = catalog.indexes()
-        for i in ('authors', 'year', 'journal'):
+        for i in ('authors', 'year', 'abstract'):
             self.failUnless(i in indexes, '%s not found in catalog indexes' % i)
     def testCatalogMetadata(self):
         u'''Check that we have the right metadata columns.'''
