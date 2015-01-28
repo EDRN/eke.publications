@@ -49,6 +49,7 @@ def dropExistingPublications(setupTool):
 
 def rebuildPublicationFacets(setupTool):
     u'''Nuke the faceted settings and rebuild them on all publication folders.'''
+    setupTool.runImportStepFromProfile(PROFILE_ID, 'atcttool')
     portal = _getPortal(setupTool)
     request = portal.REQUEST
     catalog = plone.api.portal.get_tool('portal_catalog')
