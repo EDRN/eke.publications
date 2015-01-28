@@ -42,4 +42,13 @@ RESERVED. U.S. Government Sponsorship acknowledged.
         handler='eke.publications.upgrades.dropExistingPublications'
         sortkey='2'
     />
+    <genericsetup:upgradeStep
+        source='5'
+        destination='6'
+        title='Rebuild Publication Facets (5→6)'
+        description='In profile 6 we have brand new faceted navigation settings'
+        profile='eke.publications:default'
+        handler='eke.publications.upgrades.rebuildPublicationFacets'
+        sortkey='1'
+    />
 </configure>
