@@ -7,7 +7,9 @@ from eke.publications.interfaces import IPublicationFolder
 from Products.CMFCore.utils import getToolByName
 from utils import setFacetedNavigation
 from zope.component import getMultiAdapter
-import plone.api
+import plone.api, logging
+
+_logger = logging.getLogger(__name__)
 
 def _getPortal(context):
     return getToolByName(context, 'portal_url').getPortalObject()
@@ -49,7 +51,9 @@ def dropExistingPublications(setupTool):
 
 def rebuildPublicationFacets(setupTool):
     u'''Nuke the faceted settings and rebuild them on all publication folders.'''
+    _logger.critical('@@@@ running catalog step')
     setupTool.runImportStepFromProfile(PROFILE_ID, 'catalog')
+    _logger.critical('@@@@ running atcttool step')
     setupTool.runImportStepFromProfile(PROFILE_ID, 'atcttool')
     portal = _getPortal(setupTool)
     request = portal.REQUEST
@@ -64,4 +68,5 @@ def rebuildPublicationFacets(setupTool):
     for pubFolder in results:
         subtyper = getMultiAdapter((pubFolder, request), name=u'faceted_subtyper')
         subtyper.disable()
-        setFacetedNavigation(pubFolder, request)    
+        _logger.critical('@@@@ setting up facets on %s', '/'.join(pubFolder.getPhysicalPath()))
+        setFacetedNavigation(pubFolder, request)
