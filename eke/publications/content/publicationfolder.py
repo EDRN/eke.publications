@@ -25,6 +25,25 @@ PublicationFolderSchema = knowledgefolder.KnowledgeFolderSchema.copy() + atapi.S
             description=_(u'URLs to additional sources of RDF that describe publications.'),
         ),
     ),
+    atapi.StringField(
+        'pubSumDataSource',
+        required=False,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'Publication Summary Statistics Data Source'),
+            description=_(u'URL to a source of summary statistics json that describes biomarker data.'),
+            size=60,
+        ),
+    ),
+    atapi.StringField(
+        'dataSummary',
+        required=False,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'Publication Summary Statistics Data'),            description=_(u'Summary statistics json that describes biomarker data.'),
+            size=10000,
+        ),
+    ),
 ))
 
 finalizeATCTSchema(PublicationFolderSchema, folderish=True, moveDiscussion=False)
@@ -36,6 +55,8 @@ class PublicationFolder(knowledgefolder.KnowledgeFolder):
     _at_rename_after_creation = True
     schema                    = PublicationFolderSchema
     additionalDataSources     = atapi.ATFieldProperty('additionalDataSources')
+    pubSumDataSource          = atapi.ATFieldProperty('pubSumDataSource')
+    dataSummary               = atapi.ATFieldProperty('dataSummary')
 
 atapi.registerType(PublicationFolder, PROJECTNAME)
 

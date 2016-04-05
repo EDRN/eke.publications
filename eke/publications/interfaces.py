@@ -22,6 +22,11 @@ class IPublicationFolder(IKnowledgeFolder):
             description=_(u'URL to an additional source of RDF publication data.'),
         ),
     )
+    dataSummary = schema.TextLine(
+        title=_(u'Publication Statistics'),
+        description=_(u'Publication statistics.'),
+        required=False
+    )
 
 class IPublication(IKnowledgeObject):
     '''Publication.'''

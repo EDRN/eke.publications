@@ -29,7 +29,13 @@ RESERVED. U.S. Government Sponsorship acknowledged.
         menu='plone_displayviews'
         title='Publication Folder view'
     />
-
+    <!-- Reporting graphs -->
+    <browser:page
+        for='*'
+        permission='zope2.Public'
+        name='publication_timeline_report'
+        template='templates/publication_timeline_report.pt'
+    />
     <!-- Publication -->
     <browser:resource name='publication.gif' file='images/publication.gif'/>
     <browser:page
@@ -48,6 +54,12 @@ RESERVED. U.S. Government Sponsorship acknowledged.
     <browser:resource
         name='eke-publications.css'
         file='eke-publications.css'
+    />
+    <browser:page
+        class='.views.PublicationFolderSummary'
+        for='..interfaces.IPublicationFolder'
+        name='summary'
+        permission='zope2.View'
     />
     
 </configure>

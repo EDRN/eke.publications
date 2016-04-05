@@ -47,7 +47,8 @@
                         navigation_root_url context/@@plone_portal_state/navigation_root_url;
                         pas_member context/@@pas_member;">
     <tal:listing condition="batch">
-
+        <center><h4>Publication Timeline Frequency Stats</h4></center>
+        <iframe width="100%" height="190px" frameborder="0" src="/edrn/publication_timeline_report"/>
         <table class='publicationsTable'>
           <thead>
             <tr>
@@ -97,7 +98,6 @@
       </table>
 
         <div metal:use-macro="context/batch_macros/macros/navigation" />
-
     </tal:listing>
     <metal:empty metal:define-slot="no_items_in_listing">
         <p class="discreet"

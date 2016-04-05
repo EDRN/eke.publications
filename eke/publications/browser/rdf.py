@@ -5,9 +5,8 @@
 '''
 EKE Publications: RDF ingest for publication folders and their publications.
 '''
-
 from eke.knowledge.browser.rdf import CreatedObject, KnowledgeFolderIngestor
-from rdflib import URIRef, ConjunctiveGraph, URLInputSource
+from rdflib import URIRef, ConjunctiveGraph, URLInputSource, Literal
 from Acquisition import aq_inner
 from eke.publications.interfaces import IPublication
 from eke.publications import ENTREZ_TOOL, ENTREZ_EMAIL
@@ -15,6 +14,7 @@ from plone.i18n.normalizer.interfaces import IIDNormalizer
 from Bio import Entrez
 from zope.component import getUtility
 import plone.api, contextlib, logging, cgi
+from urllib2 import urlopen
 
 _logger = logging.getLogger(__name__)
 
@@ -25,6 +25,7 @@ FETCH_GROUP_SIZE = 450 # Fetch this many publications in Entrez.fetch, pausing t
 _publicationTypeURI = URIRef('http://edrn.nci.nih.gov/rdf/types.rdf#Publication')
 _typeURI            = URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#type')
 _pmidURI            = URIRef('http://edrn.nci.nih.gov/rdf/schema.rdf#pmid')
+_yearURI            = URIRef('http://edrn.nci.nih.gov/rdf/schema.rdf#year')
 
 # Set up Entrez
 Entrez.tool = ENTREZ_TOOL
@@ -52,17 +53,29 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
             graph.parse(URLInputSource(url))
             self.addGraphToStatements(graph, statements)
         return statements
+    def setSummaryData(self):
+        #Get json data from Publication Summary
+        context = aq_inner(self.context)
+        jsonlines = urlopen(context.pubSumDataSource)
+        json = ""
+        for line in jsonlines:
+            json += line
+        context.dataSummary = json
+
     def getIdentifiersForPubMedID(self, statements):
         u'''Given statements in the form of a dict {uri → {predicate → [objects]}}, yield a new dict
         {uri → PubMedID} including only those uris that are EDRN publication objects and only including
         those that have PubMedIDs.  In addition, don't duplicate PubMedIDs.'''
-        identifiers, pubMedIDs = {}, set()
+        identifiers, pubMedIDs= {}, set()
         for uri, predicates in statements.iteritems():
             uri = unicode(uri)
             typeURI = predicates[_typeURI][0]
             if typeURI != _publicationTypeURI: continue
             if _pmidURI not in predicates: continue
             pmID = predicates[_pmidURI][0]
+            if _yearURI in predicates:
+                year = predicates[_yearURI][0]
+
             pmID = unicode(pmID).strip()
             if not pmID: continue
             if pmID == u'N/A': continue
@@ -70,6 +83,7 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
                 _logger.warning('PubMedID %s duplicated in %s, ignoring that URI', pmID, uri)
                 continue
             identifiers[uri] = pmID
+                
             pubMedIDs.add(pmID)
         return identifiers
     def filterExistingPublications(self, identifiers):
@@ -143,16 +157,20 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
                     month = medline[u'MedlineCitation'][u'Article'][u'Journal'][u'JournalIssue'][u'PubDate'].get(
                         u'Month', None
                     )
+                    year_literal = Literal(year)
+
                     if month: pub.month = unicode(month)
                     pub.pubMedID = pubMedID
                     pub.reindexObject()
                     createdObjects.append(CreatedObject(pub))
         return createdObjects
     def __call__(self):
+        self.setSummaryData()
         statements = self.getRDFStatements()
-        identifiers = self.getIdentifiersForPubMedID(statements)
+        identifiers= self.getIdentifiersForPubMedID(statements)
         missingIdentifiers = self.filterExistingPublications(identifiers)
-        self.objects = self.createMissingPublications(missingIdentifiers)
+        self.objects= self.createMissingPublications(identifiers)
+
         return self.renderResults()
 
         # rc = super(PublicationFolderIngestor, self).__call__()

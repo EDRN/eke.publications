@@ -13,6 +13,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eke.knowledge.browser.views import KnowledgeFolderView, KnowledgeObjectView
 from eke.publications.interfaces import IPublication, IPublicationFolder
 from eke.site.interfaces import IPerson
+from Products.Five.browser import BrowserView
 
 _pubMedPrefix='http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=DetailsSearch&Term='
 _pubMedSuffix='%5Buid%5D'
@@ -66,4 +67,8 @@ class PublicationView(KnowledgeObjectView):
         results = catalog(object_provides=IPerson.__identifier__, Title=surname)
         if len(results) == 0: return None
         return results[0].getURL()
-
+class PublicationFolderSummary(BrowserView):
+    def __call__(self):
+        self.request.RESPONSE.setHeader('Content-type', 'application/json')
+        context = aq_inner(self.context)
+        return context.dataSummary
