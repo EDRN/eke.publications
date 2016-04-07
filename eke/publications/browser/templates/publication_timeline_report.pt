@@ -86,9 +86,9 @@ function dashboard(id, fData){
     var hG = histoGram(sF); // create the histogram.
 }
 </script>
-<script type="text/javascript" src="/edrn/portal_javascripts/EDRN%20Theme/++resource++plone.app.jquery.js"></script>
-<script type="text/javascript" src="/edrn/portal_javascripts/EDRN%20Theme/jquery-integration.js"></script>
-<script type="text/javascript" src="/edrn/portal_javascripts/EDRN%20Theme/++resource++plone.app.jquerytools.js"></script>
+<script type="text/javascript" src="portal_javascripts/EDRN%20Theme/++resource++plone.app.jquery.js"></script>
+<script type="text/javascript" src="portal_javascripts/EDRN%20Theme/jquery-integration.js"></script>
+<script type="text/javascript" src="portal_javascripts/EDRN%20Theme/++resource++plone.app.jquerytools.js"></script>
 <script>
 /*var freqData=[{year:'1997',freq:{publications: 1}}
 ,{year:'1996',freq:{publications: 7}}
@@ -110,7 +110,7 @@ function dashboard(id, fData){
 ,{year:'2013',freq:{publications: 85}}
 ];*/
 document.addEventListener( 'DOMContentLoaded', function () {
-    $.getJSON( "/edrn/publications/@@summary", function( data ) {
+    $.getJSON( "publications/@@summary", function( data ) {
         var items = [];
         $.each( data, function( key, val ) {
           if(key == 'Head and Neck'){
