@@ -73,8 +73,6 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
             if typeURI != _publicationTypeURI: continue
             if _pmidURI not in predicates: continue
             pmID = predicates[_pmidURI][0]
-            if _yearURI in predicates:
-                year = predicates[_yearURI][0]
 
             pmID = unicode(pmID).strip()
             if not pmID: continue
@@ -157,7 +155,6 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
                     month = medline[u'MedlineCitation'][u'Article'][u'Journal'][u'JournalIssue'][u'PubDate'].get(
                         u'Month', None
                     )
-                    year_literal = Literal(year)
 
                     if month: pub.month = unicode(month)
                     pub.pubMedID = pubMedID
@@ -169,7 +166,7 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
         statements = self.getRDFStatements()
         identifiers= self.getIdentifiersForPubMedID(statements)
         missingIdentifiers = self.filterExistingPublications(identifiers)
-        self.objects= self.createMissingPublications(identifiers)
+        self.objects= self.createMissingPublications(missingIdentifiers)
 
         return self.renderResults()
 
