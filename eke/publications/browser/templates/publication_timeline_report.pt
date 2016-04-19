@@ -90,39 +90,18 @@ function dashboard(id, fData){
 <script type="text/javascript" src="portal_javascripts/EDRN%20Theme/jquery-integration.js"></script>
 <script type="text/javascript" src="portal_javascripts/EDRN%20Theme/++resource++plone.app.jquerytools.js"></script>
 <script>
-/*var freqData=[{year:'1997',freq:{publications: 1}}
-,{year:'1996',freq:{publications: 7}}
-,{year:'1998',freq:{publications: 5}}
-,{year:'1999',freq:{publications: 15}}
-,{year:'2000',freq:{publications: 23}}
-,{year:'2001',freq:{publications: 99}}
-,{year:'2002',freq:{publications: 132}}
-,{year:'2003',freq:{publications: 105}}
-,{year:'2004',freq:{publications: 147}}
-,{year:'2005',freq:{publications: 177}}
-,{year:'2006',freq:{publications: 162}}
-,{year:'2007',freq:{publications: 204}}
-,{year:'2008',freq:{publications: 171}}
-,{year:'2009',freq:{publications: 88}}
-,{year:'2010',freq:{publications: 103}}
-,{year:'2011',freq:{publications: 140}}
-,{year:'2012',freq:{publications: 120}}
-,{year:'2013',freq:{publications: 85}}
-];*/
+
 document.addEventListener( 'DOMContentLoaded', function () {
     $.getJSON( "publications/@@summary", function( data ) {
         var items = [];
-        $.each( data, function( key, val ) {
-          if(key == 'Head and Neck'){
-            key = 'Head&Neck';
-            items.unshift({year: key, freq:{publications: val}});
-          }else{
-            items.push({year: key, freq:{publications:val}});
-          }
+        console.log(data);
+        var datakeys = Object.keys(data);
+        datakeys.sort()
+        $.each( datakeys , function( key ) {
+            items.push({year: datakeys[key], freq:{publications:data[datakeys[key]]}});
         });
 
         dashboard('#dashboard', items);
-        //dashboard('#dashboard',items);
     });
 });
 </script>
