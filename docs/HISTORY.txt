@@ -4,8 +4,8 @@ Changelog
 What follows is a history of changes from release to release.
 
 
-1.1.14 — TBD
-------------
+1.1.14 — Visuals
+----------------
 
 • Added visualizations
 • CA-1338: Fix tests for eke.biomarker, eke.publication, edrnsite.collaborations, eke.committee.
