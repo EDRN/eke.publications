@@ -160,6 +160,7 @@ First, let's create a new, empty folder with which to play::
     >>> browser.getLink(id='publication-folder').click()
     >>> browser.getControl(name='title').value = "Cook's Bookshelf"
     >>> browser.getControl(name='rdfDataSource').value = u'testscheme://localhost/pubs/a'
+    >>> browser.getControl(name='pubSumDataSource').value = u'testscheme://localhost/pubs/f'
     >>> browser.getControl(name='form.button.save').click()
     >>> browser.open(portalURL + '/cooks-bookshelf/content_status_modify?workflow_action=publish')
     >>> f = portal['cooks-bookshelf']

@@ -88,9 +88,12 @@ _markedUpPublicationRDF = '''<?xml version="1.0" encoding="UTF-8"?>
     </rdf:Description>
 </rdf:RDF>'''
 
+_summaryPublicationJSON = '''{"2014":24,"2002":6,"2003":6,"2007":174,"2001":3,"2012":110,"2001":82,"2010":94,"2011":126,"2011":24,"2010":14,"2013":15,"2012":22,"2003":87,"2005":12,"2015":5,"2013":78,"2007":18,"2005":133,"2004":129,"2000":2,"2006":146,"2006":16,"2000":21,"2004":10,"2002":103,"2008":31,"2009":17,"2009":72,"2008":135}'''
+
 def registerLocalTestData():
     ekeKnowledgeBase.registerTestData('/pubs/a', _singlePublicationRDF)
     ekeKnowledgeBase.registerTestData('/pubs/b', _doublePublicationRDF)
     ekeKnowledgeBase.registerTestData('/pubs/c', _morePublicationRDF)
     ekeKnowledgeBase.registerTestData('/pubs/d', _yetMorePublicationRDF)
     ekeKnowledgeBase.registerTestData('/pubs/e', _markedUpPublicationRDF)
+    ekeKnowledgeBase.registerTestData('/pubs/f', _summaryPublicationJSON)
