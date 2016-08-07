@@ -167,7 +167,8 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
         return createdObjects
     def __call__(self):
         try:
-            self.setSummaryData()
+            if context.pubSumDataSource:
+                self.setSummaryData()
             statements = self.getRDFStatements()
             identifiers= self.getIdentifiersForPubMedID(statements)
             missingIdentifiers = self.filterExistingPublications(identifiers)
