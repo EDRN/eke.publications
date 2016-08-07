@@ -166,15 +166,12 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
                     createdObjects.append(CreatedObject(pub))
         return createdObjects
     def __call__(self):
-        try:
-            if context.pubSumDataSource:
-                self.setSummaryData()
-            statements = self.getRDFStatements()
-            identifiers= self.getIdentifiersForPubMedID(statements)
-            missingIdentifiers = self.filterExistingPublications(identifiers)
-            self.objects= self.createMissingPublications(missingIdentifiers)
-        except Exception,e: print "ERROREROROROEROROR:"+str(e)
-
+        if context.pubSumDataSource:
+            self.setSummaryData()
+        statements = self.getRDFStatements()
+        identifiers= self.getIdentifiersForPubMedID(statements)
+        missingIdentifiers = self.filterExistingPublications(identifiers)
+        self.objects= self.createMissingPublications(missingIdentifiers)
         return self.renderResults()
 
         # rc = super(PublicationFolderIngestor, self).__call__()
