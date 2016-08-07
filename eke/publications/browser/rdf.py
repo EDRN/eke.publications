@@ -60,11 +60,12 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
     def setSummaryData(self):
         #Get json data from Publication Summary
         context = aq_inner(self.context)
-        jsonlines = urlopen(context.pubSumDataSource)
-        json = ""
-        for line in jsonlines:
-            json += line
-        context.dataSummary = json
+        if context.pubSumDataSource:
+            jsonlines = urlopen(context.pubSumDataSource)
+            json = ""
+            for line in jsonlines:
+                json += line
+            context.dataSummary = json
 
     def getIdentifiersForPubMedID(self, statements):
         u'''Given statements in the form of a dict {uri → {predicate → [objects]}}, yield a new dict
@@ -166,8 +167,7 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
                     createdObjects.append(CreatedObject(pub))
         return createdObjects
     def __call__(self):
-        if context.pubSumDataSource:
-            self.setSummaryData()
+        self.setSummaryData()
         statements = self.getRDFStatements()
         identifiers= self.getIdentifiersForPubMedID(statements)
         missingIdentifiers = self.filterExistingPublications(identifiers)
