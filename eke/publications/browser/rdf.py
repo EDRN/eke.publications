@@ -167,11 +167,13 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
         return createdObjects
     def __call__(self):
         try:
+            print "GOT HERE"
             self.setSummaryData()
             statements = self.getRDFStatements()
             identifiers= self.getIdentifiersForPubMedID(statements)
             missingIdentifiers = self.filterExistingPublications(identifiers)
             self.objects= self.createMissingPublications(missingIdentifiers)
+            print "END HERE"
         except Exception,e: print "ERROREROROROEROROR:"+str(e)
 
         return self.renderResults()
