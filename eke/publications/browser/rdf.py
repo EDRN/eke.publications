@@ -60,13 +60,14 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
     def setSummaryData(self):
         #Get json data from Publication Summary
         context = aq_inner(self.context)
-        if context.pubSumDataSource:
+        try:
             jsonlines = urlopen(context.pubSumDataSource)
             json = ""
             for line in jsonlines:
                 json += line
             context.dataSummary = json
-
+        except:
+            _logger.warning('Error when trying to access publication summary data source. Skipping summarization...')
     def getIdentifiersForPubMedID(self, statements):
         u'''Given statements in the form of a dict {uri → {predicate → [objects]}}, yield a new dict
         {uri → PubMedID} including only those uris that are EDRN publication objects and only including
