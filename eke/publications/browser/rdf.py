@@ -45,8 +45,12 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
     def getRDFStatements(self):
         u'''Parse the main and additional RDF data sources and return a dict {uri → {predicate → [objects]}}'''
         context = aq_inner(self.context)
+        if not context.rdfDataSource:
+            raise RDFIngestException(_(u'This publication folder lacks one of its RDF source URLs.'))
         urls = [context.rdfDataSource]
-        urls.extend(context.additionalDataSources)
+
+        if context.additionalDataSources:
+            urls.extend(context.additionalDataSources)
         statements = {}
         for url in urls:
             graph = ConjunctiveGraph()
@@ -162,11 +166,13 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
                     createdObjects.append(CreatedObject(pub))
         return createdObjects
     def __call__(self):
-        self.setSummaryData()
-        statements = self.getRDFStatements()
-        identifiers= self.getIdentifiersForPubMedID(statements)
-        missingIdentifiers = self.filterExistingPublications(identifiers)
-        self.objects= self.createMissingPublications(missingIdentifiers)
+        try:
+            self.setSummaryData()
+            statements = self.getRDFStatements()
+            identifiers= self.getIdentifiersForPubMedID(statements)
+            missingIdentifiers = self.filterExistingPublications(identifiers)
+            self.objects= self.createMissingPublications(missingIdentifiers)
+        except Exception,e: print "ERROREROROROEROROR:"+str(e)
 
         return self.renderResults()
 
