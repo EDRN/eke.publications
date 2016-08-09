@@ -10,7 +10,7 @@ import os.path
 # ------------
 
 _name        = 'eke.publications'
-_version     = '1.1.15'
+_version     = '1.1.16'
 _description = 'Publications Management for the EDRN Knowledge Environment'
 _author      = 'Sean Kelly'
 _authorEmail = 'sean.kelly@jpl.nasa.gov'
