@@ -4,6 +4,12 @@ Changelog
 What follows is a history of changes from release to release.
 
 
+1.1.15 — Protection
+-------------------
+
+• CA-1349: Summary ingest should be robust in the face of failures
+
+
 1.1.14 — Visuals
 ----------------
 

@@ -5,7 +5,7 @@
 '''
 EKE Publications: RDF ingest for publication folders and their publications.
 '''
-from eke.knowledge.browser.rdf import CreatedObject, KnowledgeFolderIngestor
+from eke.knowledge.browser.rdf import CreatedObject, KnowledgeFolderIngestor, RDFIngestException
 from rdflib import URIRef, ConjunctiveGraph, URLInputSource, Literal
 from Acquisition import aq_inner
 from eke.publications.interfaces import IPublication
@@ -66,13 +66,13 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
             for line in jsonlines:
                 json += line
             context.dataSummary = json
-        except:
+        except IOError:
             _logger.warning('Error when trying to access publication summary data source. Skipping summarization...')
     def getIdentifiersForPubMedID(self, statements):
         u'''Given statements in the form of a dict {uri → {predicate → [objects]}}, yield a new dict
         {uri → PubMedID} including only those uris that are EDRN publication objects and only including
         those that have PubMedIDs.  In addition, don't duplicate PubMedIDs.'''
-        identifiers, pubMedIDs= {}, set()
+        identifiers, pubMedIDs = {}, set()
         for uri, predicates in statements.iteritems():
             uri = unicode(uri)
             typeURI = predicates[_typeURI][0]
