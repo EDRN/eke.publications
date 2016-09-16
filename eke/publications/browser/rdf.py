@@ -61,6 +61,8 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
         #Get json data from Publication Summary
         context = aq_inner(self.context)
         try:
+            url = context.pubSumDataSource
+            if not url: return
             jsonlines = urlopen(context.pubSumDataSource)
             json = ""
             for line in jsonlines:
