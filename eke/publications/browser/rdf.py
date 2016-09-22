@@ -19,7 +19,7 @@ from urllib2 import urlopen
 _logger = logging.getLogger(__name__)
 
 # Constants
-FETCH_GROUP_SIZE = 450 # Fetch this many publications in Entrez.fetch, pausing to construct objects between each
+FETCH_GROUP_SIZE = 100  # Fetch this many publications in Entrez.fetch, pausing to construct objects between each
 
 # Other constnats: Well-known URI refs
 _publicationTypeURI = URIRef('http://edrn.nci.nih.gov/rdf/types.rdf#Publication')
