@@ -31,7 +31,7 @@ PublicationFolderSchema = knowledgefolder.KnowledgeFolderSchema.copy() + atapi.S
         storage=atapi.AnnotationStorage(),
         widget=atapi.StringWidget(
             label=_(u'Publication Summary Statistics Data Source'),
-            description=_(u'URL to a source of summary statistics json that describes biomarker data.'),
+            description=_(u'URL to a source of summary statistics json that describes publication data.'),
             size=60,
         ),
     ),
