@@ -27,7 +27,7 @@ PublicationFolderSchema = knowledgefolder.KnowledgeFolderSchema.copy() + atapi.S
     ),
     atapi.StringField(
         'pubSumDataSource',
-        required=False,
+        required=True,
         storage=atapi.AnnotationStorage(),
         widget=atapi.StringWidget(
             label=_(u'Publication Summary Statistics Data Source'),

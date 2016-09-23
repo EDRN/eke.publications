@@ -3,6 +3,10 @@ Changelog
 
 What follows is a history of changes from release to release.
 
+1.1.18 - Updates
+----------------
+
+• CA-1348: Summary source URLs should be marked as required
 
 1.1.17 — TBD
 ------------
