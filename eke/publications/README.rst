@@ -60,6 +60,7 @@ in the portal::
     >>> browser.getControl(name='title').value = u'My Magazine Collection'
     >>> browser.getControl(name='description').value = u'This folder is just for functional tests.'
     >>> browser.getControl(name='rdfDataSource').value = u'testscheme://localhost/pubs/a'
+    >>> browser.getControl(name='pubSumDataSource').value = u'testscheme://localhost/pubs/f'
     >>> browser.getControl(name='form.button.save').click()
     >>> 'my-magazine-collection' in portal.objectIds()
     True
