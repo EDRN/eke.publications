@@ -36,9 +36,8 @@ def setFacetedNavigation(folder, request):
         sortreversed=False,
         hidezerocount=False
     )
-    criteria.add('debug', 'top', 'default', title='Debug Criteria', user='kelly')
     criteria.add('text', 'top', 'default', title=u'Search', hidden=False, index='SearchableText',
-        count=False, onlyallelements=True)    
+        count=False, onlyallelements=True)
     criteria.add('text', 'top', 'advanced', title=u'Search Titles Only', hidden=False, index='Title', count=False,
         onlyallelements=True)
     criteria.add('text', 'top', 'advanced', title=u'Authors', hidden=False, index='authors', count=False,

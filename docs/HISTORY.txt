@@ -3,16 +3,14 @@ Changelog
 
 What follows is a history of changes from release to release.
 
-1.1.18 - Updates
-----------------
+
+1.1.17 — Confusion, Indigestion
+-------------------------------
 
 • CA-1348: Summary source URLs should be marked as required
 • CA-1350: Help text on PublicationsFolder fields is confusing
-
-1.1.17 — TBD
-------------
-
-• CA-1406 - Portal cannot ingest publications
+• CA-1406: Portal cannot ingest publications
+• CA-1447: Faceted debug criteria causing test failures
 
 
 1.1.16 — More Protection
