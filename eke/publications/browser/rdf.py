@@ -133,7 +133,7 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
             _logger.warning(u'Fetching from Entrez %d PubMedIDs', len(pubMedIDs))
             with contextlib.closing(Entrez.efetch(db='pubmed',retmode='xml',rettype='medline',id=pubMedIDs)) as handle:
                 records = Entrez.read(handle)
-                for i in zip(identifiers, records):
+                for i in zip(identifiers, records[u'PubmedArticle']):  # How did this ever work before?
                     identifier, medline = unicode(i[0]), i[1]
                     pubMedID = unicode(medline[u'MedlineCitation'][u'PMID'])
                     title = self.getTitle(medline)
@@ -171,10 +171,10 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
         return createdObjects
     def __call__(self):
         self.setSummaryData()
-        statements = self.getRDFStatements()
-        identifiers= self.getIdentifiersForPubMedID(statements)
+        statements         = self.getRDFStatements()
+        identifiers        = self.getIdentifiersForPubMedID(statements)
         missingIdentifiers = self.filterExistingPublications(identifiers)
-        self.objects= self.createMissingPublications(missingIdentifiers)
+        self.objects       = self.createMissingPublications(missingIdentifiers)
         return self.renderResults()
 
         # rc = super(PublicationFolderIngestor, self).__call__()

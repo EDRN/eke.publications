@@ -4,6 +4,16 @@ Changelog
 What follows is a history of changes from release to release.
 
 
+1.1.18 — Whaaaaaa?
+------------------
+
+Bug: we were attempting to iterate over the result of ``Entrez.read`` which is
+a two-key dictionary and not a sequence.  We're supposed to iterate over
+the key ``u'PubmedArticle'`` value, which is the sequence of PubMed results.
+
+The thing is: *how did this ever work?*
+
+
 1.1.17 — Confusion, Indigestion
 -------------------------------
 
