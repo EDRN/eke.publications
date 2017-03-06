@@ -4,6 +4,12 @@ Changelog
 What follows is a history of changes from release to release.
 
 
+1.1.19 — TBD
+------------
+
+• CA-1326 - Unicode error when rendering a publication
+
+
 1.1.18 — Whaaaaaa?
 ------------------
 

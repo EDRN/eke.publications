@@ -26,7 +26,7 @@
                                 <ul id='pubAuthors' tal:define='authors context/authors'
                                     style='font-size: 80% !important'>
                                     <li tal:repeat='author authors' style='padding-bottom: 0.5em'>
-                                        <tal:define define='authorURL python:view.generateAuthorLink(author);'>
+                                        <tal:define define='authorURL python:view.generateAuthorLink(author.decode("utf-8"));'>
                                             <tal:if condition='authorURL'>
                                                 <a href='#' tal:attributes='href authorURL' tal:content='author'>
                                                     Largenose N
