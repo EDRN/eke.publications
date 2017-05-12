@@ -70,3 +70,6 @@ def rebuildPublicationFacets(setupTool):
         subtyper.disable()
         _logger.critical('@@@@ setting up facets on %s', '/'.join(pubFolder.getPhysicalPath()))
         setFacetedNavigation(pubFolder, request)
+
+def reloadTypeInfo(setup):
+        setup.runImportStepFromProfile(PROFILE_ID, 'typeinfo')

@@ -51,4 +51,13 @@ RESERVED. U.S. Government Sponsorship acknowledged.
         handler='eke.publications.upgrades.rebuildPublicationFacets'
         sortkey='1'
     />
+    <genericsetup:upgradeStep
+        source='6'
+        destination='7'
+        title='Reload typeinfo (6→7)'
+        description='In profile 7 we have new field in publications'
+        profile='eke.publications:default'
+        handler='eke.publications.upgrades.reloadTypeInfo'
+        sortkey='1'
+    />
 </configure>
