@@ -110,6 +110,17 @@ PublicationSchema = knowledgeobject.KnowledgeObjectSchema.copy() + atapi.Schema(
         ),
         predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#pubURL',
     ),
+    atapi.StringField(
+        'siteID',
+        storage=atapi.AnnotationStorage(),
+        searchable=True,
+        widget=atapi.StringWidget(
+            label=_(u'Site ID'),
+            description=_(u'DMCC-assigned identifier for the site.'),
+            size=5,
+        ),
+        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#site',
+    ),
 ))
 # FIXME: KnowledgeObjectSchema has title's predicate set to something wrong.
 # When that's finally fixed, remove this line:
@@ -131,6 +142,7 @@ class Publication(knowledgeobject.KnowledgeObject):
     year        = atapi.ATFieldProperty('year')
     month       = atapi.ATFieldProperty('month')
     pubURL      = atapi.ATFieldProperty('pubURL')
+    siteID      = atapi.ATFieldProperty('siteID')
     
 atapi.registerType(Publication, PROJECTNAME)
 

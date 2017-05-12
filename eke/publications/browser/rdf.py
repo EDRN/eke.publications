@@ -26,6 +26,7 @@ _publicationTypeURI = URIRef('http://edrn.nci.nih.gov/rdf/types.rdf#Publication'
 _typeURI            = URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#type')
 _pmidURI            = URIRef('http://edrn.nci.nih.gov/rdf/schema.rdf#pmid')
 _yearURI            = URIRef('http://edrn.nci.nih.gov/rdf/schema.rdf#year')
+_siteURI            = URIRef('http://edrn.nci.nih.gov/rdf/schema.rdf#site')
 
 # Set up Entrez
 Entrez.tool = ENTREZ_TOOL
@@ -81,6 +82,9 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
             if typeURI != _publicationTypeURI: continue
             if _pmidURI not in predicates: continue
             pmID = predicates[_pmidURI][0]
+            siteID = None
+            if _siteURI in predicates:
+                siteID = unicode(predicates[_siteURI][0])
 
             pmID = unicode(pmID).strip()
             if not pmID: continue
@@ -88,7 +92,7 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
             if pmID in pubMedIDs:
                 _logger.warning('PubMedID %s duplicated in %s, ignoring that URI', pmID, uri)
                 continue
-            identifiers[uri] = pmID
+            identifiers[uri] = (pmID,siteID)
                 
             pubMedIDs.add(pmID)
         return identifiers
@@ -129,7 +133,9 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
         normalize = getUtility(IIDNormalizer).normalize
         createdObjects = []
         for group in self.divvy(identifiers):
-            identifiers, pubMedIDs = [i[0] for i in group], [i[1] for i in group]
+            identifiers, pubInfo = [i[0] for i in group], [i[1] for i in group]
+            pubInfoDict = dict(pubInfo)
+            pubMedIDs = pubInfoDict.keys()
             _logger.warning(u'Fetching from Entrez %d PubMedIDs', len(pubMedIDs))
             with contextlib.closing(Entrez.efetch(db='pubmed',retmode='xml',rettype='medline',id=pubMedIDs)) as handle:
                 records = Entrez.read(handle)
@@ -166,6 +172,8 @@ class PublicationFolderIngestor(KnowledgeFolderIngestor):
 
                     if month: pub.month = unicode(month)
                     pub.pubMedID = pubMedID
+                    if pubInfoDict[pubMedID]:
+                        pub.siteID = pubInfoDict[pubMedID].split('/')[-1]
                     pub.reindexObject()
                     createdObjects.append(CreatedObject(pub))
         return createdObjects

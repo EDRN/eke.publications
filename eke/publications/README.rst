@@ -113,6 +113,7 @@ So, let's create one in our above Publication Folder::
     >>> browser.getControl(name='issue').value = '3'
     >>> browser.getControl(name='volume').value = '4'
     >>> browser.getControl(name='pubMedID').value = '1645221Q'
+    >>> browser.getControl(name='siteID').value = '80'
     >>> browser.getControl(name='pubURL').value = 'http://unknown.com/printable/pub13792'
     >>> browser.getControl(name='form.button.save').click()
     >>> 's-w-i-t-c-h-a-new-model-for-release-of-norepinephrine' in f.objectIds()
@@ -140,6 +141,8 @@ So, let's create one in our above Publication Folder::
     '1645221Q'
     >>> pub.pubURL
     'http://unknown.com/printable/pub13792'
+    >>> pub.siteID
+    '80'
     
 A publication page should include a link to its PubMed entry::
 
@@ -192,6 +195,8 @@ Ingesting from the RDF data source ``testscheme://localhost/pubs/a``::
     '2012'
     >>> pub.pubMedID
     '23319948'
+    >>> pub.siteID
+    '80'
 
 
 The source ``testscheme://localhost/pub/b`` contains both the above article and
