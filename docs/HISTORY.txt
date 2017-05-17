@@ -4,10 +4,11 @@ Changelog
 What follows is a history of changes from release to release.
 
 
-1.1.20 — People's pubs
+1.1.20 — People's Pubs
 ----------------------
 
 • CA-1528 - Add publications to Person pages
+
 
 1.1.19 — Üñįçøďę
 ----------------
