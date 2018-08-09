@@ -9,7 +9,7 @@ from eea.facetednavigation.interfaces import IPossibleFacetedNavigable
 from eke.publications.content.publicationfolder import PublicationFolder
 from eke.publications.testing import EKE_PUBLICATIONS_INTEGRATION_TESTING
 from Products.CMFCore.utils import getToolByName
-import unittest2 as unittest
+import unittest
 
 class SetupTest(unittest.TestCase):
     '''Unit tests the setup of this package.'''
